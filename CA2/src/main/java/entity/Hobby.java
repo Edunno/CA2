@@ -23,19 +23,19 @@ public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
+    private String description;
     @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.ALL)
     private List<Person> persons = new ArrayList();
 
     public Hobby() {
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Person> getPersons() {
