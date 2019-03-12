@@ -4,13 +4,16 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -28,7 +31,9 @@ public class Address implements Serializable {
     private String additionalInfo;
     @OneToMany(mappedBy="address",cascade = CascadeType.ALL)
     @JoinColumn(name="FK_person")
-    private List<Person> persons = new ArrayList();
+    private Set<Person> persons = new HashSet();
+    @ManyToOne
+    private CityInfo city;
 
     public Address() {
     }
@@ -53,7 +58,7 @@ public class Address implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
-    public List<Person> getPersons() {
+    public Set<Person> getPersons() {
         return persons;
     }
 

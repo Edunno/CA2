@@ -12,54 +12,55 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * @author Esben
  * All rights belong to respective contributors.
  */
 @Entity
-public class Hobby implements Serializable {
+public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String description;
-    @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.ALL)
-    private Set<Person> persons = new HashSet();
+    private int zipCode;
+    private String city;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @JoinColumn(name="FK_Address")
+    private Set<Address> adresses = new HashSet();
 
-    public Hobby(String name) {
-        this.name = name;
+    public CityInfo() {
     }
 
-    public Hobby() {
+    public CityInfo(String city) {
+        this.city = city;
     }
 
-    public String getName() {
-        return name;
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
-    
-    public String getDescription() {
-        return description;
+    public String getCity() {
+        return city;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public Set<Person> getPersons() {
-        return persons;
+    public Set<Address> getAdresses() {
+        return adresses;
     }
 
-    public void addPersons(Person p) {
-        this.persons.add(p);
+    public void addAdress(Address address) {
+        this.adresses.add(address);
     }
     
 
@@ -81,10 +82,10 @@ public class Hobby implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Hobby)) {
+        if (!(object instanceof CityInfo)) {
             return false;
         }
-        Hobby other = (Hobby) object;
+        CityInfo other = (CityInfo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -93,7 +94,7 @@ public class Hobby implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Hobby[ id=" + id + " ]";
+        return "entity.CityInfo[ id=" + id + " ]";
     }
 
 }

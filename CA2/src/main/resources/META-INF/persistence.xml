@@ -6,6 +6,7 @@
     <class>entity.Hobby</class>
     <class>entity.Phone</class>
     <class>entity.Address</class>
+    <class>entity.CityInfo</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://testprogram.dk:3306/CA2_DB?zeroDateTimeBehavior=convertToNull"/>

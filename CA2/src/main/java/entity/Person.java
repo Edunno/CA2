@@ -4,7 +4,9 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,10 +32,10 @@ public class Person implements Serializable {
     private String firstName;
     private String lastName;
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Hobby> hobbies = new ArrayList();
+    private Set<Hobby> hobbies = new HashSet();
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     @JoinColumn(name="FK_person")
-    private List<Phone> phones = new ArrayList();
+    private Set<Phone> phones = new HashSet();
     @ManyToOne
     private String address;
 
@@ -44,7 +46,7 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public List<Phone> getPhones() {
+    public Set<Phone> getPhones() {
         return phones;
     }
 
@@ -52,7 +54,7 @@ public class Person implements Serializable {
         this.phones.add(phone);
     }
 
-    public List<Hobby> getHobbies() {
+    public Set<Hobby> getHobbies() {
         return hobbies;
     }
 
