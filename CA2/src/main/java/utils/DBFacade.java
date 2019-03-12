@@ -13,31 +13,41 @@ import javax.persistence.Persistence;
  * All rights belong to respective contributors.
  */
 public class DBFacade {
+    private EntityManagerFactory emf;
+    
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CA2DB");
-        EntityManager em = emf.createEntityManager();
+        EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("CA2DB");
+        EntityManager em1 = emf1.createEntityManager();
         
         try{    
-            em.getTransaction().begin();
+            em1.getTransaction().begin();
             Person pm = new Person("Lars");
             pm.addHobby(new Hobby("Skiing"));
             pm.addHobby(new Hobby("Swinger clubbing"));
-            em.persist(pm);
-            em.getTransaction().commit();
+            em1.persist(pm);
+            em1.getTransaction().commit();
             
         }
         finally{
-            em.close();
+            em1.close();
         }
         
     }
 
     public void addEntityManager(EntityManagerFactory emf) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.emf = emf;
     }
 
     public Person addPerson(Person p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.persist(p);
+            em.getTransaction().commit();
+            return p;
+        }finally{
+            em.close();
+        }
     }
 
     public Person getPersonByNameTest(String john) {
