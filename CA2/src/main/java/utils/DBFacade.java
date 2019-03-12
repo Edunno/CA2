@@ -7,6 +7,7 @@ import entity.Person;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  * @author Esben
@@ -50,8 +51,14 @@ public class DBFacade {
         }
     }
 
-    public Person getPersonByNameTest(String john) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Person getPersonByNameTest(String name) {
+        EntityManager em = emf.createEntityManager();
+        try{
+            Query q = em.createQuery("select c from Person c where c.firstName = :name").setParameter("name", name);
+            return (Person) q.getSingleResult();
+        }finally{
+            em.close();
+        }
     }
 
     public Person getPersonById(int id) {
