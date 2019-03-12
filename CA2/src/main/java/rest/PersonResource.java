@@ -13,6 +13,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -36,10 +37,11 @@ public class PersonResource {
      * @return an instance of Integer
      */
     @GET
+    @Path("/complete")
     @Produces(MediaType.APPLICATION_JSON)
-    public Integer getJson() {
+    public Response getPersonFromID() {
         //TODO return proper representation object
-        throw new UnsupportedOperationException();
+        return Response.ok().entity("Hejsa").build();
     }
 
     /**
