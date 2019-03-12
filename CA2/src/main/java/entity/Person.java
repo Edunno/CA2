@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  * @author Esben
@@ -28,8 +30,23 @@ public class Person implements Serializable {
     private String lastName;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Hobby> hobbies = new ArrayList();
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @JoinColumn(name="FK_person")
+    private List<Phone> phones = new ArrayList();
+
+    public Person(String email) {
+        this.email = email;
+    }
     
     public Person() {
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void addPhone(Phone phone) {
+        this.phones.add(phone);
     }
 
     public List<Hobby> getHobbies() {

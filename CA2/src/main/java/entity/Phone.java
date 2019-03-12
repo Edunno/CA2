@@ -3,61 +3,57 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * @author Esben
  * All rights belong to respective contributors.
  */
 @Entity
-public class Hobby implements Serializable {
+public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private int number;
     private String description;
-    @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.ALL)
-    private List<Person> persons = new ArrayList();
+    @ManyToOne
+    private Person person;
 
-    public Hobby(String name) {
-        this.name = name;
+    public Phone(int number) {
+        this.number = number;
     }
 
-    public Hobby() {
+    public Phone() {
     }
 
-    public String getName() {
-        return name;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Person> getPersons() {
-        return persons;
-    }
-
-    public void addPersons(Person p) {
-        this.persons.add(p);
     }
     
 
@@ -79,10 +75,10 @@ public class Hobby implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Hobby)) {
+        if (!(object instanceof Phone)) {
             return false;
         }
-        Hobby other = (Hobby) object;
+        Phone other = (Phone) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -91,7 +87,7 @@ public class Hobby implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Hobby[ id=" + id + " ]";
+        return "entity.Phone[ id=" + id + " ]";
     }
 
 }
