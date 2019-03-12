@@ -37,7 +37,7 @@ public class Person implements Serializable {
     @JoinColumn(name="FK_person")
     private Set<Phone> phones = new HashSet();
     @ManyToOne
-    private String address;
+    private Address address;
 
     public Person(String email) {
         this.email = email;
