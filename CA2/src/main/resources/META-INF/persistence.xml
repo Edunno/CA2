@@ -3,6 +3,7 @@
   <persistence-unit name="CA2DB" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entity.Person</class>
+    <class>entity.Hobby</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://testprogram.dk:3306/CA2_DB?zeroDateTimeBehavior=convertToNull"/>

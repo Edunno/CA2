@@ -3,10 +3,14 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  * @author Esben
@@ -22,9 +26,20 @@ public class Person implements Serializable {
     private String email;
     private String firstName;
     private String lastName;
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Hobby> hobbies = new ArrayList();
+    
     public Person() {
     }
+
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void addHobby(Hobby hobby) {
+        this.hobbies.add(hobby);
+    }
+    
 
     public String getEmail() {
         return email;
