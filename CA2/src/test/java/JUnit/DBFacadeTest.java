@@ -46,6 +46,10 @@ public class DBFacadeTest {
     @Test
     public void addPersonTest(){
         DBFacade db = setEMF();
+        Person xtra = new Person("gustaff@gmail.com");
+        xtra.setFirstName("Gustaff");
+        xtra.setLastName("Graff");
+        db.addPerson(xtra);
         Person p = new Person("John@hotmail.com");
         p.setFirstName("John");
         p.setLastName("Johnson");
