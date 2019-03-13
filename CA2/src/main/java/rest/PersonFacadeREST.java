@@ -61,7 +61,7 @@ public class PersonFacadeREST {
     }
 
     @GET
-    @Path("/complete/{name}")
+    @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPersonFromName(@PathParam("name") String name) {
 
