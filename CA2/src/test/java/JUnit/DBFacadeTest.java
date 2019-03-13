@@ -28,10 +28,10 @@ public class DBFacadeTest {
     @BeforeClass
     public void setupClass(){
         DBFacade db = setEMF();
-        try{
-            
-        }
-        
+        Person p = new Person("ms@stevia.com");
+        p.setLastName("Sommer");
+        p.setFirstName("Michael");
+        db.addPerson(p);
     }
     
     @Before
