@@ -6,6 +6,7 @@
 package JUnit;
 
 import entity.Person;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.validation.constraints.AssertTrue;
@@ -89,10 +90,13 @@ public class DBFacadeTest {
         Person tp = db.deletePersonById(id);
         assertEquals(id,tp.getId(),0.1);
     }
-//    @Test
-//    public void getPersonsByNameTest(){
-//        
-//    }
+    @Test
+    public void getPersonsByNameTest(){
+        DBFacade db = setEMF();
+        String tName = "john";
+        List<Person> tList = db.getPersonsByName(tName);
+        assertTrue(!tList.isEmpty());
+    }
 
     private DBFacade setEMF(){
         DBFacade db = new DBFacade();

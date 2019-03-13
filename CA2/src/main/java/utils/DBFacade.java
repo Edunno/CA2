@@ -3,6 +3,7 @@ package utils;
 
 import entity.Hobby;
 import entity.Person;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -75,6 +76,19 @@ public class DBFacade {
             em.remove(p);
             return p;
         } finally {
+            em.close();
+        }
+    }
+
+    public List<Person> getPersonsByName(String name) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query q = em.createQuery("select c from Person c where c.firstName = :name").setParameter("name", name);
+            Query v = em.createQuery("select c from Person c where c.lastName = :name").setParameter("name", name);
+            List<Person> ls = q.getResultList();
+            ls.addAll(v.getResultList());
+            return ls;
+        }finally{
             em.close();
         }
     }
