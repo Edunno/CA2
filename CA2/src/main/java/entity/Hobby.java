@@ -13,12 +13,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Esben
  * All rights belong to respective contributors.
  */
 @Entity
+@XmlRootElement
 public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +57,7 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
+    @XmlTransient
     public Set<Person> getPersons() {
         return persons;
     }
