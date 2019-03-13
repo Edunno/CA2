@@ -53,7 +53,8 @@ public class CityInfoFacadeTest {
     public void addCityTest() {
         CityInfoFacade db = setEMF();
         CityInfo city = new CityInfo("Nørrebro");
-        city.addAdress(new Address("Vejgaden"));
+        Address adr = new Address("Vejgaden");
+        city.addAdress(adr);
         city.setZipCode(2200);
         CityInfo tc = db.addCity(city);
         assertEquals(tc, city);
