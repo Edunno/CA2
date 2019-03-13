@@ -32,7 +32,7 @@ public class Address implements Serializable {
     private Integer id;
     private String street;
     private String additionalInfo;
-    @OneToMany(mappedBy="persons",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="address",cascade = CascadeType.ALL)
     @JoinColumn(name="FK_person")
     private Set<Person> persons = new HashSet();
     @ManyToOne
