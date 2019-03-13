@@ -31,7 +31,6 @@ public class DBFacade {
 //        }
 //
 //    }
-
     public void addEntityManager(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -60,22 +59,22 @@ public class DBFacade {
 
     public Person getPersonById(int id) {
         EntityManager em = emf.createEntityManager();
-        try{
-            Person p = em.find(Person.class, (Integer)id);
+        try {
+            Person p = em.find(Person.class, (Integer) id);
             return p;
-        }finally{
+        } finally {
             em.close();
         }
     }
 
     public Person deletePersonById(int id) {
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
-            Person p = em.find(Person.class, (Integer)id);
+            Person p = em.find(Person.class, (Integer) id);
             em.remove(p);
             return p;
-        }finally{
+        } finally {
             em.close();
         }
     }
