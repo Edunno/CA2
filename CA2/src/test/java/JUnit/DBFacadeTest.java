@@ -80,7 +80,7 @@ public class DBFacadeTest {
         DBFacade db = setEMF();
         int id = 1;
         Person tp = db.getPersonById(id);
-        assertEquals(tp.getFirstName(),"Gustaff");
+        assertEquals(tp.getFirstName(),"Michael");
     }
     
     @Test
