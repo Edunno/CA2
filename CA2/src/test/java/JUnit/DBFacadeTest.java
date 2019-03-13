@@ -89,6 +89,10 @@ public class DBFacadeTest {
         Person tp = db.deletePersonById(id);
         assertEquals(id,tp.getId(),0.1);
     }
+//    @Test
+//    public void getPersonsByNameTest(){
+//        
+//    }
 
     private DBFacade setEMF(){
         DBFacade db = new DBFacade();
