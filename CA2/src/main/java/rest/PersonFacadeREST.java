@@ -5,6 +5,7 @@
  */
 package rest;
 
+import DTO.PersonFullDTO;
 import entity.Person;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -19,20 +20,56 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import utils.DBFacade;
+import com.google.gson.Gson;
+import java.util.ArrayList;
 
 /**
  *
  * @author caspe
  */
-@Stateless
-@Path("entity.person")
+@Path("person")
 public class PersonFacadeREST extends AbstractFacade<Person> {
+
+    Gson gson = new Gson();
+    DBFacade dbf = new DBFacade();
 
     @PersistenceContext(unitName = "CA2DB")
     private EntityManager em;
 
     public PersonFacadeREST() {
         super(Person.class);
+    }
+
+//    @GET
+//    @Path("/all")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getAllPets() {
+//        List<PersonFullDTO> pList = 
+//
+//        return Response.ok().entity(gson.toJson()).build();
+//        //return Response.ok().entity(petList.size()).build();
+//    }
+
+    @GET
+    @Path("/complete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPersonFromID(@PathParam("id") int id) {
+
+        Person p = dbf.getPersonById(id);
+        //  PersonFullDTO pdto = new PersonFullDTO(p);
+        return Response.ok().entity(gson.toJson(p)).build();
+    }
+
+    @GET
+    @Path("/complete/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPersonFromName(@PathParam("name") String name) {
+
+        Person p = dbf.getPersonByName(name);
+        //  PersonFullDTO pdto = new PersonFullDTO(p);
+        return Response.ok().entity(gson.toJson(p)).build();
     }
 
     @POST
@@ -87,14 +124,5 @@ public class PersonFacadeREST extends AbstractFacade<Person> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
-//
-//    @GET
-//    @Path("/complete/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getPersonFromID(@PathParam("id") int ID) {
-//        dbf = new DBFacade();
-//        Person p = dbf.getPersonById(ID);
-//        return Response.ok().entity(p.getFirstName()).build();
-//    }
