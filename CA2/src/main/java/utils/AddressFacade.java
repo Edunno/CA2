@@ -6,7 +6,7 @@ import javax.persistence.EntityManagerFactory;
 /**
  * @author Esben All rights belong to respective contributors.
  */
-public class AdressFacade {
+public class AddressFacade {
 
     private EntityManagerFactory emf;
 

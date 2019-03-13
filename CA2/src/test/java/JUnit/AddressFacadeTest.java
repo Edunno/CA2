@@ -5,6 +5,7 @@
  */
 package JUnit;
 
+import entity.Address;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
@@ -13,7 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import utils.DBFacade;
+import utils.AddressFacade;
 
 /**
  *
@@ -41,7 +42,11 @@ public class AddressFacadeTest {
     }
     @Test
     public void addAdressTest(){
-        DBFacade db = setEMF();
+        AddressFacade db = setEMF();
+        Address tA = new Address();
+        tA.setStreet("BowlerStreet 8");
+        tA.setAdditionalInfo("Beyond the scope of mere mortals!");
+        db.a
         assertTrue(true);
     }
 
