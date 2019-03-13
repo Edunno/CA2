@@ -26,8 +26,9 @@ public class DBFacadeTest {
     }
     
     @BeforeClass
-    public void setupClass(){
-        DBFacade db = setEMF();
+    public static void setupClass(){
+        DBFacadeTest t1 = new DBFacadeTest();
+        DBFacade db = t1.setEMF();
         Person p = new Person("ms@stevia.com");
         p.setLastName("Sommer");
         p.setFirstName("Michael");
@@ -56,10 +57,10 @@ public class DBFacadeTest {
     @Test
     public void addPersonTest(){
         DBFacade db = setEMF();
-        Person xtra = new Person("gustaff@gmail.com");
-        xtra.setFirstName("Gustaff");
-        xtra.setLastName("Graff");
-        db.addPerson(xtra);
+//        Person xtra = new Person("gustaff@gmail.com");
+//        xtra.setFirstName("Gustaff");
+//        xtra.setLastName("Graff");
+//        db.addPerson(xtra);
         Person p = new Person("John@hotmail.com");
         p.setFirstName("John");
         p.setLastName("Johnson");
@@ -78,7 +79,7 @@ public class DBFacadeTest {
         DBFacade db = setEMF();
         int id = 1;
         Person tp = db.getPersonById(id);
-        assertEquals(tp.getFirstName(),"John");
+        assertEquals(tp.getFirstName(),"Gustaff");
     }
     
     @Test
