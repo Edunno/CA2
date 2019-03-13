@@ -13,35 +13,36 @@ import java.util.List;
  * @author Lenovo
  */
 public class PersonFullDTO {
-    
-int id;
-String firstName;
-String lastName;
-String email;
-List<Phone> phoneList;
-Address address;
-List<Hobby> hobbyList;
 
+    int id;
+    String firstName;
+    String lastName;
+    String email;
+    List<Phone> phoneList;
+    Address address;
+    List<Hobby> hobbyList;
 
-public PersonFullDTO(Person p){
-this.id = p.getId();
-this.firstName = p.getFirstName();
-this.lastName = p.getLastName();
-this.email = p.getEmail();
-for (Phone ph : p.getPhones()){
-    phoneList.add(ph);
-}
-for(Hobby h : hobbyList){
-    hobbyList.add(h);
-}
-this.address = p.getAddress();
-}
+    public PersonFullDTO(Person p) {
+        this.id = p.getId();
+        this.firstName = p.getFirstName();
+        this.lastName = p.getLastName();
+        this.email = p.getEmail();
+        if (p.getPhones() != null) {
+            for (Phone ph : p.getPhones()) {
+                phoneList.add(ph);
+            }
+        }
+        if (p.getHobbies() != null) {
+            for (Hobby h : hobbyList) {
+                hobbyList.add(h);
+            }
+        }
+        this.address = p.getAddress();
+
+    }
 
     public PersonFullDTO() {
     }
-
-
-
 
     public int getId() {
         return id;
@@ -99,6 +100,4 @@ this.address = p.getAddress();
         this.hobbyList = hobbyList;
     }
 
-
-    
 }
