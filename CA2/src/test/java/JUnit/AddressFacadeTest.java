@@ -27,6 +27,12 @@ public class AddressFacadeTest {
 
     @BeforeClass
     public static void setUpClass() {
+        AddressFacadeTest t1 = new AddressFacadeTest();
+        AddressFacade db = t1.setEMF();
+        Address tA = new Address();
+        tA.setStreet("Bowlerstreet 10");
+        tA.setAdditionalInfo("Beyond the scope of mere immortals!");
+        Address retA = db.addAddress(tA);
     }
 
     @AfterClass
@@ -44,10 +50,10 @@ public class AddressFacadeTest {
     public void addAdressTest(){
         AddressFacade db = setEMF();
         Address tA = new Address();
-        tA.setStreet("BowlerStreet 8");
+        tA.setStreet("Bowlerstreet 8");
         tA.setAdditionalInfo("Beyond the scope of mere mortals!");
-        db.a
-        assertTrue(true);
+        Address retA = db.addAddress(tA);
+        assertEquals(retA.getStreet(),tA.getStreet());
     }
 
     @Test
@@ -57,21 +63,32 @@ public class AddressFacadeTest {
 
     @Test
     public void getAddressByStreetTest() {
-        assertTrue(true);
+        AddressFacade db = setEMF();
+        String street = "Bowlerstreet 10";
+        Address tA = db.getAddressByStreet(street);
+        assertEquals(tA.getStreet(),street);
     }
 
     @Test
-    public void getAdressByIdTest() {
-        assertTrue(true);
+    public void getAddressByIdTest() {
+        AddressFacade db = setEMF();
+        int tID = 1;
+        Address tA = db.getAddressById(tID);
+        assertEquals(tA.getId(),tID,0.1);
+        
     }
     
     @Test
     public void deleteAddressByIdTest(){
-        assertTrue(true);
+        AddressFacade db = setEMF();
+        String street = "Bowlerstreet 10";
+        Address tA = db.getAddressByStreet(street);
+        Address tA2 = db.deleteAddressById(tA.getId());
+        assertEquals(tA.getStreet(),tA2.getStreet());
     }
 
-    private DBFacade setEMF() {
-        DBFacade db = new DBFacade();
+    private AddressFacade setEMF() {
+        AddressFacade db = new AddressFacade();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("CA2DB");
         db.addEntityManager(emf);
         return db;
