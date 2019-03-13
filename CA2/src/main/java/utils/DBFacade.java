@@ -92,4 +92,14 @@ public class DBFacade {
             em.close();
         }
     }
+
+    public Person getPersonByEmail(String email) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query q = em.createQuery("select c from Person c where c.email = :email").setParameter("email", email);
+            return (Person) q.getResultList().get(0);
+        }finally{
+            em.close();
+        }
+    }
 }

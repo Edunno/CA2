@@ -97,6 +97,14 @@ public class DBFacadeTest {
         List<Person> tList = db.getPersonsByName(tName);
         assertTrue(!tList.isEmpty());
     }
+    
+    @Test
+    public void getPersonByEmail(){
+        DBFacade db = setEMF();
+        String tEmail = "John@hotmail.com";
+        Person p = db.getPersonByEmail(tEmail);
+        assertEquals(tEmail,p.getEmail());
+    }
 
     private DBFacade setEMF(){
         DBFacade db = new DBFacade();
