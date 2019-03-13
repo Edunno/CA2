@@ -16,12 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Esben
  * All rights belong to respective contributors.
  */
 @Entity
+@XmlRootElement
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +49,7 @@ public class Person implements Serializable {
     public Person() {
     }
 
+    @XmlTransient
     public Set<Phone> getPhones() {
         return phones;
     }
@@ -54,6 +58,7 @@ public class Person implements Serializable {
         this.phones.add(phone);
     }
 
+    @XmlTransient
     public Set<Hobby> getHobbies() {
         return hobbies;
     }
