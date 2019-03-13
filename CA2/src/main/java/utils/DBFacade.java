@@ -53,7 +53,7 @@ public class DBFacade {
         EntityManager em = emf.createEntityManager();
         try {
             Query q = em.createQuery("select c from Person c where c.firstName = :name").setParameter("name", name);
-            return (Person) q.getSingleResult();
+            return (Person) q.getResultList().get(0);
         } finally {
             em.close();
         }
