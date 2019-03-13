@@ -13,6 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import utils.DBFacade;
 
 /**
@@ -22,6 +23,15 @@ import utils.DBFacade;
 public class DBFacadeTest {
     
     public DBFacadeTest() {
+    }
+    
+    @BeforeClass
+    public void setupClass(){
+        DBFacade db = setEMF();
+        try{
+            
+        }
+        
     }
     
     @Before
@@ -60,7 +70,7 @@ public class DBFacadeTest {
     public void getPersonByNameTest(){
         DBFacade db = setEMF();
         String name = "John";
-        Person tp = db.getPersonByNameTest(name);
+        Person tp = db.getPersonByName(name);
         assertEquals(name,tp.getFirstName());
     }
     @Test
