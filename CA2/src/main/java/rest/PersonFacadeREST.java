@@ -21,7 +21,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import utils.DBFacade;
+import utils.PersonFacade;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.ws.rs.core.Context;
@@ -35,31 +35,27 @@ import javax.ws.rs.core.UriInfo;
 public class PersonFacadeREST {
 
     Gson gson = new Gson();
-    DBFacade dbf = new DBFacade();
+    PersonFacade pf = new PersonFacade();
     @Context
     private UriInfo context;
-
-    
 
     public PersonFacadeREST() {
     }
 
 //    @GET
-//    @Path("/all")
+//    @Path("/complete")
 //    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getAllPets() {
-//        List<PersonFullDTO> pList = 
-//
-//        return Response.ok().entity(gson.toJson()).build();
-//        //return Response.ok().entity(petList.size()).build();
+//    public Response getAllPerson(@PathParam("id") int id) {
+//        TODO return proper representation object
+//        return Response.ok().entity(gson.toJson(dbf.g).build();
 //    }
-
     @GET
-    @Path("/complete/{id}")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPersonFromID(@PathParam("id") int id) {
 
-        Person p = dbf.getPersonById(id);
+        Person p = pf.getPersonById(id);
+        System.out.println(p.getFirstName());
         //  PersonFullDTO pdto = new PersonFullDTO(p);
         return Response.ok().entity(gson.toJson(p)).build();
     }
@@ -69,11 +65,25 @@ public class PersonFacadeREST {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPersonFromName(@PathParam("name") String name) {
 
-        Person p = dbf.getPersonByName(name);
+        Person p = pf.getPersonByName(name);
+        System.out.println(p);
         //  PersonFullDTO pdto = new PersonFullDTO(p);
         return Response.ok().entity(gson.toJson(p)).build();
     }
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void postPerson(String content) {
+        Person p = gson.fromJson(content, Person.class);
+        pf.addPerson(p);
+    }
 
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteCustomer(@PathParam("id") int id) {
+        Person p = pf.deletePersonById(id);
+        return Response.ok().entity(gson.toJson(p)).build();
+    }
 
 }
