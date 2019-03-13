@@ -87,7 +87,7 @@ public class DBFacadeTest {
         DBFacade db = setEMF();
         int id = 1;
         Person tp = db.deletePersonById(id);
-        assertEquals(tp.getFirstName(),"John");
+        assertEquals(id,tp.getId(),0.1);
     }
 
     private DBFacade setEMF(){

@@ -70,6 +70,14 @@ public class DBFacade {
     }
 
     public Person deletePersonById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            Person p = em.find(Person.class, (Integer)id);
+            em.remove(p);
+            return p;
+        }finally{
+            em.close();
+        }
     }
 }
