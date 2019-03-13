@@ -56,6 +56,7 @@ public class AddressFacade {
             em.getTransaction().begin();
             Address a = em.find(Address.class, id);
             em.remove(a);
+            em.getTransaction().commit();
             return a;
         } finally {
             em.close();
