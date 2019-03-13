@@ -49,7 +49,7 @@ public class DBFacade {
         }
     }
 
-    public Person getPersonByNameTest(String name) {
+    public Person getPersonByName(String name) {
         EntityManager em = emf.createEntityManager();
         try {
             Query q = em.createQuery("select c from Person c where c.firstName = :name").setParameter("name", name);

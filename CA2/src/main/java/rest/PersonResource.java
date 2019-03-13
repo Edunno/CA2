@@ -5,6 +5,8 @@
  */
 package rest;
 
+import entity.Person;
+import utils.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -12,6 +14,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -20,9 +23,15 @@ import javax.ws.rs.core.Response;
  *
  * @author Lenovo
  */
+
+
+
 @Path("person")
 public class PersonResource {
 
+
+DBFacade dbf;    
+    
     @Context
     private UriInfo context;
 
@@ -37,11 +46,12 @@ public class PersonResource {
      * @return an instance of Integer
      */
     @GET
-    @Path("/complete")
+    @Path("/complete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonFromID() {
-        //TODO return proper representation object
-        return Response.ok().entity("Hejsa").build();
+    public Response getPersonFromID(@PathParam("id") int ID) {
+        dbf = new DBFacade();
+        Person p = dbf.getPersonById(ID);
+        return Response.ok().entity(p.getFirstName()).build();
     }
 
     /**
